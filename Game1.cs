@@ -52,6 +52,7 @@ public class Game1 : Game
         {
             enemy.Update();
         }
+        Collision();
         // TODO: Add your update logic here
 
         base.Update(gameTime);
@@ -63,7 +64,7 @@ public class Game1 : Game
 
         _spriteBatch.Begin();
         player.Draw(_spriteBatch);
-        foreach (Enemy enemy in enemies)
+        foreach(Enemy enemy in enemies)
         {
             enemy.Draw(_spriteBatch);
         }
@@ -71,5 +72,23 @@ public class Game1 : Game
         // TODO: Add your drawing code here
 
         base.Draw(gameTime);
+    }
+
+    private void Collision()
+    {
+        List<Bullet> bullets = player.Bullets;
+        List<Enemy> livingEnemies = new List <Enemy>();
+        if(bullets.Count == 0) return;
+        foreach(Enemy enemy in enemies)
+        {
+            foreach(Bullet bullet in bullets)
+            {
+                if(!bullet.Hitbox.Intersects(enemy.Hitbox))
+                {
+                    livingEnemies.Add(enemy);
+                }
+            }
+        }
+        enemies = livingEnemies;
     }
 }

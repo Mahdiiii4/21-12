@@ -9,6 +9,7 @@ namespace _21_12
         {
             postion = new Vector2(500, 500);
             color = Color.DarkGreen;
+            hitbox = new Rectangle(0,0,25,50);
         }
 
         public override void Update()
